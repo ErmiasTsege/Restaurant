@@ -1,5 +1,5 @@
 //import the associated models from index.js
-const {Menu, Restaurant, MenuItems,sequelize} = require('./index')
+const {Menu, Restaurant, MenuItems,Customer,Order,sequelize} = require('./index')
 
 //test musician database CRUD
 describe('Menu Database', () => {
@@ -81,8 +81,6 @@ describe('Menu Database', () => {
         //magic sequelize add method
         await testResturant.addMenu(testMenu1)
         await testResturant.addMenu(testMenu2)
-
-
         await testMenu1.addMenuItem(testMenuItems1)
         await testMenu2.addMenuItem(testMenuItems2)
         //retrieve list of menus in this restaurant
@@ -94,6 +92,7 @@ describe('Menu Database', () => {
         //assert that the 0th index of the array menulist is an instance of the model Restaurant
         expect(menuItemsList[0] instanceof MenuItems).toBeTruthy()
         expect(menuItemsList[0].menuItemName).toMatch('salad')
+        
         
     }) 
 })

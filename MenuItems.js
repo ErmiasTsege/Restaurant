@@ -5,7 +5,11 @@ class MenuItems extends Model{
 
 MenuItems.init({   
     menuItemName:DataTypes.STRING,
-    price:DataTypes.FLOAT
+    image:DataTypes.STRING,
+    price:DataTypes.FLOAT,
+    vegetarian:DataTypes.BOOLEAN,
+    MenuId : DataTypes.INTEGER
+
 },{sequelize,
   timestamps:false})
 

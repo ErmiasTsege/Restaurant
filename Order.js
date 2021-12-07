@@ -1,5 +1,5 @@
 const {sequelize,DataTypes,Model}=require('./db')
-const {Mu}
+
 
 class Order extends Model{
     
@@ -11,5 +11,5 @@ class Order extends Model{
 },{sequelize,
   timestamps:false})
   
-  module.exports={Menu,Customer,Order,OrderLine}
+  module.exports={Order}
   
