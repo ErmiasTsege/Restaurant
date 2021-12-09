@@ -6,9 +6,8 @@ class Customer extends Model{
 }
 
 Customer.init({
-    category:DataTypes.STRING,
-    menu_items:DataTypes.STRING,
-    price:DataTypes.INTEGER
+    customer_name:DataTypes.STRING
+    
 },{sequelize,
   timestamps:false})
 

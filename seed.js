@@ -92,8 +92,8 @@ const seed = async () => {
 seed()
     .then(() => {
       console.log('Seeding success!')
-    })
-    .catch(err => {
+    }).catch(err => {
       console.error('Oh noes! Something went wrong!')
       console.error(err)
-    })
+   
+      });

@@ -91,8 +91,43 @@ describe('Menu Database', () => {
         expect(menuItemsList.length).toBe(1)
         //assert that the 0th index of the array menulist is an instance of the model Restaurant
         expect(menuItemsList[0] instanceof MenuItems).toBeTruthy()
-        expect(menuItemsList[0].menuItemName).toMatch('salad')
-        
+        expect(menuItemsList[0].menuItemName).toMatch('salad')       
         
     }) 
+
+    test('Order can have menu itmes', async() => {
+        //read test instance from db
+        //read test resturant instance from db
+       // const testResturant = await Restaurant.findAll({where:{Restaurant_name: 'ArifeCafe'}});
+      
+        const testCustomer = await Customer.create({customer_name: 'Abebe'});
+        //create 2 test instances of menu
+        
+        const testOrder1 = await Order.create({Payment_type: 'card',Order_Date:'12/7/2021'})
+        const testOrder2 = await Order.create({Payment_type: 'paypal',Order_Date:'12/8/2021'})
+        const testMenuItems1 = await MenuItems.create({menuItemName: 'salad',price:10.00})
+        const testMenuItems2 = await MenuItems.create({menuItemName: 'Smothie',price:10.00})
+
+        //add test menus to test restaurant
+        //magic sequelize add method
+        await testCustomer.addOrder(testOrder1)
+        await testCustomer.addOrder(testOrder2)
+        await testOrder1.addMenuItems(testMenuItems1)
+        await testOrder2.addMenuItems(testMenuItems2)    
+        //retrieve list of menus in this restaurant        
+        const menuItemsList=await testOrder1.getMenuItems()
+        const OrderList = await testCustomer.getOrders()
+        //assert that the list of menus is length 2
+       // expect(menuList.length).toBe(2)
+        expect(OrderList.length).toBe(2)
+        //assert that the 0th index of the array menulist is an instance of the model Restaurant
+        expect(OrderList[0] instanceof Order).toBeTruthy()
+        expect(menuItemsList[0].menuItemName).toMatch('salad')   
+        expect(OrderList[0].Payment_type).toMatch('card') 
+        
+    }) 
+})
+afterAll(async()=> {
+    // await sequelize.sync({force:true})
+    sequelize.close()
 })
